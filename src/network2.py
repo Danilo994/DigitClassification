@@ -83,8 +83,7 @@ class Network(object):
                 print("Accuracy on evaluation data: {} / {}".format(
                     self.accuracy(evaluation_data), n_data))
             print
-        return evaluation_cost, evaluation_accuracy, \
-            training_cost, training_accuracy
+        return evaluation_cost, evaluation_accuracy, training_cost, training_accuracy
 
     def update_mini_batch(self, mini_batch, eta, lmbda, n):
         nabla_b = [np.zeros(b.shape) for b in self.biases]

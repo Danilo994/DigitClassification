@@ -11,8 +11,16 @@ def load_data_shared(filename="../data/mnist.pkl.gz"):
         tr, va, te = pickle.load(f, encoding="latin1")
 
     def shared(data):
-        x = torch.tensor(data[0], dtype=torch.float32)
-        y = torch.tensor(data[1], dtype=torch.int64)
+        if isinstance(data[0], list):
+            data_x = np.array(data[0], dtype=np.float32)
+        else:
+            data_x = data[0].astype(np.float32)
+        x = torch.from_numpy(data_x)
+        if isinstance(data[1], list):
+            data_y = np.array(data[1], dtype=np.int64)
+        else:
+            data_y = data[1].astype(np.int64)
+        y = torch.from_numpy(data_y)
         return x, y
 
     return [shared(tr), shared(va), shared(te)]
